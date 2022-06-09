@@ -5,38 +5,29 @@ const Jokes = require('../models/jokes.model');
 //**Get all Jokes */
 const getAllJokes = (req, res) => {
     Jokes.find()
-        .then((allJokes) => {
-            res.json(allJokes);
-        })
-        .catch((err) => {
-            res.json({msg: 'Something went wrong', err: err})
-        });
+        .then((allJokes) => res.json(allJokes))
+        .catch((err) => console.log(err));
         
-}
+        
+};
 
 // **Get a single Joke */
 const getOneJoke = (req, res) => {
     Jokes.findOne({_id: req.params.id})
-        .then((oneJoke) => {
-            res.json(oneJoke);
-        })
-        .catch((err) => {
-            res.json({msg: 'Something went wrong', err: err})
-        });
+        .then((oneJoke) => res.json(oneJoke))
+        .catch((err) => console.log(err));
+        
 
-}
+};
 
 // **Create a Joke */
 const createJoke = (req, res) => {
-    Jokes.create(req.body)
-        .then(newJoke => {
-            res.json({joke: newJoke});
-        })
-        .catch((err) => {
-            res.json({msg: 'Something went wrong', err: err})
-        });
-
-}
+    const { body} = req;
+    Jokes.create(body)
+        .then((newJoke) => res.json(newJoke))
+        .catch((err) => console.log(err));
+        
+};
 
 // **Update a Joke */
 const updateJoke = (req, res) => {
